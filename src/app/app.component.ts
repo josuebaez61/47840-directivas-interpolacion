@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-47840-directivas-practica';
+  numero = 0;
+  hayError = true;
+
+  myFontSize = '50px';
+
+
+  constructor() {
+    setInterval(() => {
+      this.numero++;
+    }, 1000);
+  }
 }
