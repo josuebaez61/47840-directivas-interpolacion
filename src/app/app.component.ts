@@ -13,9 +13,33 @@ export class AppComponent {
   myFontSize = '50px';
 
 
+  status = 2;
+
+  usuario = {
+    nombre: 'Maria',
+    apellido: ''
+  }
+
+  birthday = new Date();
+
+  price = 2500.23;
+
   constructor() {
     setInterval(() => {
       this.numero++;
     }, 1000);
+  }
+
+  onClick(event: MouseEvent): void {
+    console.log(event);
+  }
+
+  onInputChange(event: KeyboardEvent): void {
+    const htmlInput = event.target as HTMLInputElement;
+    console.log(htmlInput?.value);
+  }
+
+  onSave(): void {
+    console.log(this.usuario);
   }
 }

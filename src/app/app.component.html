@@ -1,12 +1,94 @@
-<h1>{{ title }}</h1>
-<div appRoundedBlock [ngClass]="numero > 10 ? 'error' : 'success'">{{ numero }}</div>
-<br>
-<div [ngClass]="{
-  'success': numero === 5,
-  'error': numero === 8
-}">{{ numero }}</div>
+<h2>Pipes</h2>
 
-<hr>
+<p>DatePipe: {{ birthday | date : "short" }}</p>
+<p>CurrencyPipe: {{ price | currency }}</p>
+<p>UpperCasePipe {{ "holamundo" | uppercase }}</p>
+<p>UpperCasePipe {{ "HOLAMUNDO" | lowercase }}</p>
+
+<h2>Two way binding / Enlazamiento de doble via</h2>
+
+<form>
+  <!--
+    [] = Significa que vamos a pasar data del padre a hijo
+    () = Significa que vamos a escuchar eventos de hijo a padre
+    [()] = Significa que el padre puede enviar data al hijo y el hijo
+    puede modificar una propiedad del padre
+
+
+    Ejemplo padre hijo:
+    AppComponent -> input
+  -->
+
+  <input
+    [(ngModel)]="usuario.nombre"
+    placeholder="Nombre"
+    type="text"
+    name="name"
+  />
+
+  <input
+    [(ngModel)]="usuario.apellido"
+    placeholder="Apellido"
+    type="text"
+    name="surname"
+  />
+  <button (click)="onSave()" type="button">Guardar</button>
+</form>
+
+<hr />
+
+<h2>NgFor</h2>
+
+<ul>
+  <li *ngFor="let alumno of ['Naruto', 'Sasuke', 'Sakura']; let i = index">
+    <span
+      [style.background-color]="'red'"
+      *ngIf="alumno === 'Sasuke'; else notSasuke"
+      appRoundedBlock
+      >{{ i }} - {{ alumno | uppercase }}</span
+    >
+    <ng-template #notSasuke>
+      <span>{{ i }} - {{ alumno | uppercase }}</span>
+    </ng-template>
+  </li>
+</ul>
+
+<h2>NgIf</h2>
+
+<p *ngIf="hayError; else todoOkTemplate" class="error">Ocurrio un error</p>
+<ng-template #todoOkTemplate>
+  <p class="success">Todo esta ok</p>
+</ng-template>
+
+<button (click)="onClick($event)" type="button">hayError toggle</button>
+
+<input (keyup)="onInputChange($event)" type="text" />
+
+<h2>NgSwitch</h2>
+
+<div [ngSwitch]="status">
+  <div *ngSwitchCase="1">Estado 1</div>
+
+  <div *ngSwitchCase="2">Estado 2</div>
+
+  <div *ngSwitchDefault>No es valido</div>
+</div>
+
+<h1>{{ title }}</h1>
+<div appRoundedBlock [ngClass]="numero > 10 ? 'error' : 'success'">
+  {{ numero }}
+</div>
+<br />
+<div
+  [ngClass]="{
+    success: numero === 5,
+    error: numero === 8
+  }"
+>
+  {{ numero }}
+</div>
+
+<hr />
 
 <h2 appDraggable appRoundedBlock>ngStyle</h2>
 
@@ -14,10 +96,12 @@
   Lorem ipsum dolor sit
 </div>
 
-<hr>
+<hr />
 
 <h2>Directiva personalizada</h2>
 
 <div class="success" appDraggable appRoundedBlock>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam error, vel optio corporis veniam ipsum nemo ipsam magni. Ab, commodi. Laboriosam rem id fugit eius quae odit distinctio! Amet, dicta!
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam error, vel optio
+  corporis veniam ipsum nemo ipsam magni. Ab, commodi. Laboriosam rem id fugit
+  eius quae odit distinctio! Amet, dicta!
 </div>
