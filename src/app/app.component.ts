@@ -32,6 +32,7 @@ export class AppComponent {
 
   onClick(event: MouseEvent): void {
     console.log(event);
+    this.hayError = !this.hayError;
   }
 
   onInputChange(event: KeyboardEvent): void {
